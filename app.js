@@ -16,7 +16,7 @@ const fruit = new Fruit ({
     review: "Peaches are very good"
 })
 
-fruit.save(); //"this will add apples everytime when we run this script so comment it out"
+// fruit.save(); //"this will add apples everytime when we run this script so comment it out"
 
 
 
@@ -37,3 +37,4 @@ Fruit.find({}).then(
   
 Fruit.updateOne({_id: "641d4572e8851afc88bc2eea"}, {name: "Peaches"}).then(function(){console.log("Document Updated")})
 
+Fruit.deleteOne({_id: "641d46b7ed4d372421ce5ddf"}).then(function(){console.log("Deleted successfully")})
