@@ -3,24 +3,17 @@ const mongoose = require('mongoose');
 mongoose.connect("mongodb://127.0.0.1:27017/personDB", {useNewUrlParser: true});
 
 const fruitSchema = new mongoose.Schema ({ //this should be capitalize of first letter
-    name: {
-        type: String,
-        required: [true, "Please specify name also"]
-    }, 
-    rating: {
-        type: Number,
-        min: 1,
-        max: 10
-    },
+    name: String, 
+    rating: Number,
     review: String,
 });
 
 const Fruit = mongoose.model("Fruit", fruitSchema); //Fruit is the name of collection (Singular)
 
 const fruit = new Fruit ({
-    name: "Apple",
-    rating: 7,
-    review: "Good Apple"
+    
+    rating: 10,
+    review: "Peaches are very good"
 })
 
 fruit.save(); //"this will add apples everytime when we run this script so comment it out"
@@ -34,7 +27,7 @@ fruit.save(); //"this will add apples everytime when we run this script so comme
 Fruit.find({}).then(
     function(data){
         // console.log(data)
-        mongoose.connection.close();
+        // mongoose.connection.close();
         data.forEach(function(element){console.log(element.name)})
     }).catch(
         function(err){
@@ -42,5 +35,5 @@ Fruit.find({}).then(
         });
 
   
-
+Fruit.updateOne({_id: "641d4572e8851afc88bc2eea"}, {name: "Peaches"}).then(function(){console.log("Document Updated")})
 
