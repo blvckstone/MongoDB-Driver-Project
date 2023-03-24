@@ -44,4 +44,33 @@ const banana = new Fruit({
     review: "Rich in magnecium"
 })
 
-Fruit.insertMany([kiwi, banana])
+// Fruit.insertMany([kiwi, banana])
+
+
+
+
+//to find all items use promise/async Here is an example of how to use Promise syntax:
+// Fruit.find({}).then((results) => {
+//     console.log(results);
+//   }).catch((err) => {
+//     console.error(err);
+//   });
+
+//created by your own to find all items inside collections
+Fruit.find({}).then(function(data){console.log(data)}).catch(function(err){console.log(err)});
+
+
+
+
+
+  //to find all items using async function to use this we need async function 
+//   try {
+//     const results = await MyModel.find({});
+//     console.log(results);
+//   } catch (err) {
+//     console.error(err);
+//   }
+  
+  
+
+
