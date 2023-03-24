@@ -2,9 +2,16 @@ const mongoose = require('mongoose');
 
 mongoose.connect("mongodb://127.0.0.1:27017/personDB", {useNewUrlParser: true});
 
-const fruitSchema = new mongoose.Schema ({
-    name: String, //this should be capitalize of first letter
-    rating: Number,
+const fruitSchema = new mongoose.Schema ({ //this should be capitalize of first letter
+    name: {
+        type: String,
+        required: [true, "Please specify name also"]
+    }, 
+    rating: {
+        type: Number,
+        min: 1,
+        max: 10
+    },
     review: String,
 });
 
@@ -16,61 +23,24 @@ const fruit = new Fruit ({
     review: "Good Apple"
 })
 
-// fruit.save(); "this will add apples everytime when we run this script so comment it out"
+fruit.save(); //"this will add apples everytime when we run this script so comment it out"
 
-const personSchema = new mongoose.Schema({
-    name: String,
-    age: Number
-})
-
-const Person = mongoose.model("Person", personSchema);
-
-const person = new Person({
-    name: "Shoeb",
-    age: 23
-})
-
-// person.save();
-
-const kiwi = new Fruit({
-    name: "Kiwi",
-    rating: 7,
-    review: "Best Fruit Ever"
-})
-
-const banana = new Fruit({
-    name: "Banana",
-    rating: 5,
-    review: "Rich in magnecium"
-})
-
-// Fruit.insertMany([kiwi, banana])
-
-
-
-
-//to find all items use promise/async Here is an example of how to use Promise syntax:
-// Fruit.find({}).then((results) => {
-//     console.log(results);
-//   }).catch((err) => {
-//     console.error(err);
-//   });
-
-//created by your own to find all items inside collections
-Fruit.find({}).then(function(data){console.log(data)}).catch(function(err){console.log(err)});
 
 
 
 
 
-  //to find all items using async function to use this we need async function 
-//   try {
-//     const results = await MyModel.find({});
-//     console.log(results);
-//   } catch (err) {
-//     console.error(err);
-//   }
-  
+//created by your own to find all items inside collections
+Fruit.find({}).then(
+    function(data){
+        // console.log(data)
+        mongoose.connection.close();
+        data.forEach(function(element){console.log(element.name)})
+    }).catch(
+        function(err){
+            console.log(err)
+        });
+
   
 
 
