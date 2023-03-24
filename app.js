@@ -10,17 +10,32 @@ const fruitSchema = new mongoose.Schema ({ //this should be capitalize of first 
 
 const Fruit = mongoose.model("Fruit", fruitSchema); //Fruit is the name of collection (Singular)
 
-const fruit = new Fruit ({
-    
-    rating: 10,
-    review: "Peaches are very good"
+const pineapple = new Fruit ({
+    name: "Pineapple",
+    rating: 6,
+    review: "Tasty & Yummy"
 })
 
-// fruit.save(); //"this will add apples everytime when we run this script so comment it out"
+pineapple.save(); //"this will add apples everytime when we run this script so comment it out"
 
 
+const personSchema = new mongoose.Schema({
+    name: String,
+    age: Number,
+    favoriteFruit: fruitSchema
+})
 
 
+const Person = new mongoose.model("Person", personSchema);
+
+
+const person = new Person({
+    name: "amy",
+    age: 12,
+    favoriteFruit: pineapple
+})
+
+person.save()
 
 
 //created by your own to find all items inside collections
@@ -35,6 +50,4 @@ Fruit.find({}).then(
         });
 
   
-Fruit.updateOne({_id: "641d4572e8851afc88bc2eea"}, {name: "Peaches"}).then(function(){console.log("Document Updated")})
 
-Fruit.deleteOne({_id: "641d46b7ed4d372421ce5ddf"}).then(function(){console.log("Deleted successfully")})
